@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evelyn - 金融科技个人作品集</title>
+    <style>
+        :root {
+            --primary: #0a1628;
+            --highlight: #60A5FA;
+            --text: #e6f1ff;
+            --text-muted: #8892b0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: #0a1628;
+            color: #e6f1ff;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background: #0a1628;
+            padding: 40px 0;
+            text-align: center;
+        }
+        
+        header .avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            object-position: center 5%;
+            border: 4px solid #60A5FA;
+            margin-bottom: 20px;
+        }
+        
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 5px;
+            color: #fff;
+        }
+        
+        header .english-name {
+            color: #60A5FA;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+        
+        header .contact {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        header .contact a {
+            color: #8892b0;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+        
+        header .contact a:hover {
+            color: #60A5FA;
+        }
+        
+        section {
+            padding: 50px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            color: #60A5FA;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        section h2::before {
+            content: "";
+            width: 4px;
+            height: 24px;
+            background: #60A5FA;
+            border-radius: 2px;
+        }
+        
+        .summary {
+            background: rgba(255,255,255,0.05);
+            padding: 25px;
+            border-radius: 12px;
+            border-left: 4px solid #60A5FA;
+        }
+        
+        .education-item, .experience-item, .project-item {
+            background: rgba(255,255,255,0.05);
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .education-item h3, .experience-item h3, .project-item h3 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+            color: #fff;
+        }
+        
+        .experience-item .company {
+            color: #60A5FA;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        .education-item .school, .project-item .project-name {
+            color: #60A5FA;
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+        }
+        
+        .education-item .period, .experience-item .period, .project-item .period {
+            color: #8892b0;
+            font-size: 1rem;
+            margin-bottom: 15px;
+        }
+        
+        .education-item li, .experience-item li, .project-item li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 8px;
+            color: #cbd5e1;
+            list-style: none;
+        }
+        
+        .education-item li::before, .experience-item li::before, .project-item li::before {
+            content: "▹";
+            position: absolute;
+            left: 0;
+            color: #60A5FA;
+        }
+        
+        .skills-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .skill-category {
+            background: rgba(255,255,255,0.05);
+            padding: 25px;
+            border-radius: 12px;
+        }
+        
+        .skill-category h3 {
+            color: #60A5FA;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+        
+        .skill-category li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 8px;
+            color: #cbd5e1;
+            list-style: none;
+        }
+        
+        .skill-category li::before {
+            content: "▹";
+            position: absolute;
+            left: 0;
+            color: #60A5FA;
+        }
+        
+        .education-item .gpa, .education-item .honors {
+            display: inline-block;
+            background: rgba(96, 165, 250, 0.15);
+            color: #60A5FA;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            color: #8892b0;
+            font-size: 0.9rem;
+            background: #0a1628;
+        }
+        
+        .lang-switch {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            display: flex;
+            background: rgba(100, 255, 218, 0.1);
+            border-radius: 25px;
+            padding: 4px;
+            border: 1px solid rgba(100, 255, 218, 0.3);
+        }
+
+        .lang-btn {
+            background: transparent;
+            color: #8892b0;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.3s;
+        }
+
+        .lang-btn:hover {
+            color: #60A5FA;
+        }
+
+        .lang-btn.active {
+            background: #60A5FA;
+            color: #0a1628;
+            font-weight: bold;
+        }
+        
+        @media (max-width: 600px) {
+            header h1 { font-size: 2rem; }
+            section h2 { font-size: 1.5rem; }
+            .container { padding: 0 15px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="lang-switch">
+        <button class="lang-btn active" onclick="setLang('zh')">中文</button>
+        <button class="lang-btn" onclick="setLang('en')">English</button>
+    </div>
+    <header>
+        <div class="container">
+            <img src="2025证件照-白底.jpg" alt="Evelyn" class="avatar">
+            <h1>孙雨馨</h1>
+            <p class="english-name">Evelyn, Yuxin, SUN</p>
+            <div class="contact">
+                <a href="mailto:sunyx15026089601@163.com">📧 sunyx15026089601@163.com</a>
+                <a href="tel:+852-95101035">📱 +852-95101035 / +86-15026089601</a>
+            </div>
+        </div>
+    </header>
+
+    <section>
+        <div class="container">
+            <h2 id="about-title">关于我</h2>
+            <div class="summary">
+                <div class="zh-content">
+                    <p>本人毕业于香港理工大学，获得会计与金融分析理学硕士学位，拥有商科、计算机交叉领域的知识储备和实践经验。持有英国特许公认会计师（ACCA）初级商业会计证书、初级会计职称资格证书、证券从业资格证书、期货从业资格证书，已经通过中国注册会计师（CICPA）专业阶段经济法科目考试；先后在跨境电商运营、会计、审计、行业研究、风险管理（量化风控）等领域积累实习经验，熟练操作 Wind、ifinD等金融数据终端。具有良好的中英文沟通能力，可以使用中英双语作为工作语言。此外，掌握统计学、计量经济学、机器学习、深度学习等定量分析的理论框架和实践方法，擅长数据建模、业务洞察和研究分析，熟练掌握Excel、Power BI、Tableau、SQL、Python、Stata；熟练使用Claude Code、Open Code、Gemini等AI工具，能够快速应用前沿AI工具提升工作效率、完善工作流程。我秉持持续学习、严谨细致的态度对待每一项工作任务，期待以专业能力为团队创造价值！</p>
+                </div>
+                <div class="en-content" style="display:none">
+                    <p>I have a master degree of in Accounting and Financial Analytics from The Hong Kong Polytechnic University, with interdisciplinary knowledge and practical experience in business and computer science. I obtain the ACCA Diploma in Accounting and Business (RQF Level 4), the certificate of Junior-Level Accountant, the certificate of Securities Qualification, the certificate of Futures Qualification, and have passed the examination in Economic Law of CICPA. I have accumulated internship experience in cross-border e-commerce operation, accounting, auditing, industry research, and risk management (quantitative risk control). I have excellent bilingual communication skills in Chinese and English, and can use both languages as working languages. In addition, I have a solid theoretical foundation and practical experience in quantitative analysis, including statistics, econometrics, machine learning, and deep learning. I specialize in data modeling, business insight, and research analysis, and am proficient in Excel, Power BI, Tableau, SQL, Python, and Stata. I am skilled in using cutting-edge AI tools such as Claude Code, Open Code, and Gemini, and can leverage advanced AI technologies to improve work efficiency and optimize workflows. I adopt a diligent, meticulous and proactive mindset toward all work assignments and I aspire to deliver tangible value to your team with my professional competence.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <h2 id="edu-title">教育经历</h2>
+            <div class="education-item">
+                <div class="zh-content">
+                    <h3>会计和金融分析理学硕士</h3>
+                    <div class="school">香港理工大学 工商管理学院</div>
+                    <div class="period">2025.09 - 2026.10</div>
+                    <div>
+                        <span class="gpa">GPA: 3.7/4.3</span>
+                        <span class="honors">香港理工大学基于成绩的奖学金 (Merit-Based Scholarship)</span>
+                    </div>
+                    <ul>
+                        <li>核心课程：计算机技术在会计和金融中的应用、会计和金融中的定量方法、基于编程的金融分析、商业人工智能、商业分析、投资学、公司理财</li>
+                    </ul>
+                </div>
+                <div class="en-content" style="display:none">
+                    <h3>MSc in Accounting and Finance Analytics</h3>
+                    <div class="school">The Hong Kong Polytechnic University, Faculty of Business</div>
+                    <div class="period">2025.09 - 2026.10</div>
+                    <div>
+                        <span class="gpa">GPA: 3.7/4.3</span>
+                        <span class="honors">Merit-Based Scholarship</span>
+                    </div>
+                    <ul>
+                        <li>Subject: Applications of Computing and Technology in Accounting and Finance, Financial Analysis with Programming, Quantitative Methods for Accounting and Finance, Artificial Intelligence for Business, Corporate Finance, Business Analysis, Investment</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="education-item">
+                <div class="zh-content">
+                    <h3>经济学学士 国际经济与贸易专业</h3>
+                    <div class="school">天津师范大学 经济学院</div>
+                    <div class="period">2018.09 - 2022.06</div>
+                    <div>
+                        <span class="gpa">GPA: 3.5/4.0</span>
+                        <span class="honors">专业奖学金、特等奖学金、一等奖学金</span>
+                        <span class="honors">"三好学生"称号</span>
+                    </div>
+                    <ul>
+                        <li>核心课程：高等数学、线性代数、概率论与数理统计、统计学、计量经济学、宏观经济学、微观经济学、货币银行学、世界经济学、国际贸易理论和政策</li>
+                    </ul>
+                </div>
+                <div class="en-content" style="display:none">
+                    <h3>BEc in International Economics and Trade</h3>
+                    <div class="school">Tianjin Normal University, School of Economics</div>
+                    <div class="period">2018.09 - 2022.06</div>
+                    <div>
+                        <span class="honors">Special Scholarship</span>
+                        <span class="honors">Professional Scholarship</span>
+                        <span class="honors">First-class Scholarship</span>
+                        <span class="honors">Merit Student, School of Economics</span>
+                    </div>
+                    <ul>
+                        <li>Subject: Advanced Mathematics, Linear Algebra, Probability and Mathematical Statistics, Statistics, Econometrics, Microeconomics, Macroeconomics, International Economics, Economics of Money and Banking, International Trade Theory and Policy</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <h2 id="skills-title">专业技能和证书</h2>
+            <div class="skills-container">
+                <div class="skill-category">
+                    <div class="zh-content">
+                        <h3>技术栈和AI工具</h3>
+                        <ul>
+                            <li><strong>数据工程：</strong>熟练使用Requests、BeautifulSoup、Selenium等Python第三方库进行网页数据抓取，构建自动化数据流；熟练使用Openpyxl等Python第三方库实现Excel自动化操作，提升数据清洗、整理效率；精通SQL数据查询语言，熟悉数据操纵语言和数据定义语言，掌握MySQL、SQLite等数据库的使用方法</li>
+                            <li><strong>分析建模：</strong>精通Python语言，熟练运用Pandas、NumPy、Matplotlib等第三方库进行数据分析，使用Scikit-learn、TensorFlow框架开展机器学习、深度学习项目；熟练使用Tableau、Power BI等数据可视化工具</li>
+                            <li><strong>AI生产力：</strong>具备Vibe Coding实践经验，熟练使用Claude Code、Open Code、Gemini、Cursor等AI工具，能够快速实现业务逻辑到可执行代码的闭环；熟悉大模型提示词工程、RAG架构和微调逻辑，能够快速应用前沿AI工具提升工作效率、优化工作流程</li>
+                        </ul>
+                    </div>
+                    <div class="en-content" style="display:none">
+                        <h3>Technology Stack & AI Tools</h3>
+                        <ul>
+                            <li><strong>Data Engineering:</strong> able to crawl and parse web information through Python libraries (e.g. Requests, BeautifulSoup, Selenium), able to automate Excel operations through Python libraries (e.g. Openpyxl); familiar with SQL (including DQL, DML and DDL) and skilled in various database systems including MySQL and SQLite</li>
+                            <li><strong>Analysis and Modeling:</strong> familiar with Python, able to analyze data through Pandas, NumPy and Matplotlib, able to implement machine learning/deep learning projects through Scikit-Learn and TensorFlow; familiar with data visualization tools, including Power BI and Tableau</li>
+                            <li><strong>AI Tool:</strong> Hands-on experience with Vibe Coding, using Claude Code, Open Code, Cursor and Gemini; familiar with LLM prompt engineering, RAG architecture and fine-tuning workflows; able to apply cutting-edge AI tools to improve work efficiency</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <div class="zh-content">
+                        <h3>语言</h3>
+                        <ul>
+                            <li>雅思6.5分</li>
+                            <li>CET-6</li>
+                            <li>CET-4</li>
+                        </ul>
+                    </div>
+                    <div class="en-content" style="display:none">
+                        <h3>Language</h3>
+                        <ul>
+                            <li>IELTS: 6.5</li>
+                            <li>CET-6</li>
+                            <li>CET-4</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <div class="zh-content">
+                        <h3>金融</h3>
+                        <ul>
+                            <li>证券从业资格证书</li>
+                            <li>期货从业资格证书</li>
+                            <li>熟练操作Wind、iFinD等金融数据终端</li>
+                            <li>熟练调用Akshare、Yahoo Finance、SEC EDGAR等开源金融数据API</li>
+                        </ul>
+                    </div>
+                    <div class="en-content" style="display:none">
+                        <h3>Finance</h3>
+                        <ul>
+                            <li>The certificate of Securities Qualification</li>
+                            <li>The certificate of Futures Qualification</li>
+                            <li>Familiar with financial data terminals such as Wind and iFinD</li>
+                            <li>Familiar with open-source financial data APIs including Akshare, Yahoo Finance, and SEC EDGAR</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <div class="zh-content">
+                        <h3>会计</h3>
+                        <ul>
+                            <li>初级会计职称资格证书</li>
+                            <li>ACCA初级商业会计证书</li>
+                            <li>通过中国注册会计师专业阶段经济法科目考试</li>
+                        </ul>
+                    </div>
+                    <div class="en-content" style="display:none">
+                        <h3>Accounting</h3>
+                        <ul>
+                            <li>ACCA Diploma in Accounting and Business (RQF Level 4)</li>
+                            <li>The certificate of Junior-Level Accountant</li>
+                            <li>Passed the examination in Economic Law of CICPA</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <h2 id="exp-title">实习经历</h2>
+            <div class="experience-item">
+                <div class="zh-content">
+                    <h3>风险管理（量化风控）实习生</h3>
+                    <div class="company">恒生前海基金管理有限公司</div>
+                    <div class="period">2025.11 - 2026.02</div>
+                    <ul>
+                        <li><strong>模型优化：</strong>参与量化风险管理研究，协助优化投资组合风险管理模型，完成参数校验和验证工作</li>
+                        <li><strong>业绩评估：</strong>使用Python构建多渠道业绩数据自动化处理管线，完成VaR、Beta、MDD等核心风险指标的计算和分析，开展Brinson绩效归因分析，并完成各类风险报告和归因报告的撰写</li>
+                        <li><strong>风险监控：</strong>检视风险指标、识别数据异常，规范数据分类和存储逻辑，提升风险中台响应速度</li>
+                    </ul>
+                </div>
+                    <div class="en-content" style="display:none">
+                        <h3>Risk Management Intern (Risk Quantification)</h3>
+                        <div class="company">Hang Seng Qianhai Fund Management Company Limited (HSQH)</div>
+                    <div class="period">11/2025 - 01/2026</div>
+                    <ul>
+                        <li><strong>Model Optimization:</strong> conducted the quantitative risk management research, participating in the calibration and validation of parameters of quantitative risk models</li>
+                        <li><strong>Performance Evaluation:</strong> built automated pipeline for multi-source performance data using Python, calculated and analyzed key risk indicators including Sharpe Ratio, VaR and MDD, conducted Brinson performance attribution analysis, and drafted various risk reports</li>
+                        <li><strong>Risk Monitoring:</strong> inspected risk indicators, identified data anomalies, standardized data classification and storage logic, and improved the response efficiency of the risk middle office</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="experience-item">
+                <div class="zh-content">
+                    <h3>行业研究实习生</h3>
+                    <div class="company">光大证券股份有限公司（研究所）</div>
+                    <div class="period">2025.07 - 2025.10</div>
+                    <ul>
+                        <li><strong>报告撰写：</strong>参与高端制造行业研究周报、月报和深度报告的撰写，输出具备行业洞察和数据支撑的投研观点</li>
+                        <li><strong>趋势追踪：</strong>持续跟踪具身智能机器人、新能源设备、PCB设备等高景气赛道领先企业动态，重点研判具身智能传感器、固态电池装备等关键领域的技术迭代和变化趋势，协助分析师完成对市场热点的快速覆盖</li>
+                        <li><strong>数据库建设：</strong>完善高端制造行业细分领域数据库，提升数据的准确性和可复用性</li>
+                    </ul>
+                </div>
+                <div class="en-content" style="display:none">
+                    <h3>Research Intern (High-end Manufacturing Industry)</h3>
+                    <div class="company">Everbright Securities Company Limited (EBSI)</div>
+                    <div class="period">07/2025 - 10/2025</div>
+                    <ul>
+                        <li><strong>Report Writing:</strong> wrote weekly, monthly and in-depth research reports on the high-end manufacturing industry</li>
+                        <li><strong>Trend Tracking:</strong> tracked the dynamic changes of leading enterprises in emerging high-end manufacturing fields such as new energy equipment, embodied intelligence robot, PCB equipment, supporting the timely coverage of market hotspots</li>
+                        <li><strong>Database Development:</strong> improved the segmented industry database for high-end manufacturing industry</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="experience-item">
+                <div class="zh-content">
+                    <h3>审计实习生</h3>
+                    <div class="company">新疆驰远天合有限责任会计师事务所</div>
+                    <div class="period">2025.02 - 2025.03</div>
+                    <ul>
+                        <li><strong>财务穿透：</strong>参与大型地方国有企业的财报审计工作，负责往来款项和收入成本的勾稽核对，穿透识别关联方交易</li>
+                        <li><strong>资产清查：</strong>负责固定资产和存货的监盘，对于资产折旧、减值逻辑进行校验分析，保证审计证据链的严密性</li>
+                        <li><strong>异常识别：</strong>对被审单位及其关联方的业务数据进行核实、分析，锁定异常风险点，为审计风险评估提供数据支撑</li>
+                    </ul>
+                </div>
+                <div class="en-content" style="display:none">
+                    <h3>Audit Intern</h3>
+                    <div class="company">Xinjiang Chiyuan Tianhe Limited Liability Accounting Firm</div>
+                    <div class="period">02/2025 - 03/2025</div>
+                    <ul>
+                        <li><strong>Financial Audit:</strong> participated in the audit of the state-owned enterprise, checking and reconciling accounting items</li>
+                        <li><strong>Asset Verification:</strong> conducted on-site verification of fixed assets and inventory, checked and analyzed asset depreciation and impairment logic to ensure the integrity of audit evidence</li>
+                        <li><strong>Risk Identification:</strong> analyzed business data of the audited entity and related parties, locating abnormal data and potential risks</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="experience-item">
+                <div class="zh-content">
+                    <h3>跨境电商运营实习生</h3>
+                    <div class="company">天津天外凯德商务信息咨询有限公司</div>
+                    <div class="period">2022.03 - 2022.05</div>
+                    <ul>
+                        <li><strong>平台运营：</strong>学习阿里巴巴国际站平台规则、流量逻辑、店铺操作，获得阿里巴巴跨境电商初级人才认证</li>
+                        <li><strong>用户维护：</strong>负责海外客户询盘的初步回复和需求记录，整理客户常见问题，支持团队完成客户关系日常维护</li>
+                    </ul>
+                </div>
+                <div class="en-content" style="display:none">
+                    <h3>Cross-border E-commerce Operation Intern</h3>
+                    <div class="company">Tianjin Tianwai Kaide Business Information Consulting Company Limited</div>
+                    <div class="period">03/2022 - 05/2022</div>
+                    <ul>
+                        <li><strong>Platform Operation:</strong> learned platform rules, traffic logic and operations on Alibaba International Station, and obtained the certificate of Alibaba Cross-border E-commerce Junior Talent</li>
+                        <li><strong>Customer Maintenance:</strong> responsible for initial responses to customer inquiries, sorted out frequently asked questions, and supported the team in daily customer relationship maintenance</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <h2 id="proj-title">项目经历</h2>
+            <div class="project-item">
+                <div class="zh-content">
+                    <h3>在校消费水平对当代大学生创业意愿的影响</h3>
+                    <div class="project-name">大学生创新创业训练计划（创新训练项目）</div>
+                    <div class="period">2020.05 - 2021.05</div>
+                    <ul>
+                        <li><strong>数据工程：</strong>使用针对性问卷和网络爬虫等方式获取多维度数据，并完成数据的清洗、分类和标准化处理</li>
+                        <li><strong>建模分析：</strong>根据研究目标和数据特征构建实证分析模型，探究消费水平对个体风险偏好和创业意愿的影响</li>
+                    </ul>
+                </div>
+                <div class="en-content" style="display:none">
+                    <h3>Research on the Influence of College Students' Consumption Level on Their Entrepreneurial Intention</h3>
+                    <div class="project-name">Undergraduate Training Program on Innovation and Entrepreneurship</div>
+                    <div class="period">05/2020 - 05/2021</div>
+                    <ul>
+                        <li><strong>Data Engineering:</strong> collected multi-dimensional data through targeted questionnaires and web crawlers, and completed data cleaning, organization and standardization</li>
+                        <li><strong>Modeling and Analysis:</strong> established an empirical model based on research objectives and data characteristics after reviewing previous studies</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="project-item">
+                <div class="zh-content">
+                    <h3>基于XGBoost的REITs风险预测与动态配置策略研究</h3>
+                    <div class="period">2026.02 - 2026.05</div>
+                    <ul>
+                        <li><strong>特征工程：</strong>构造涵盖宏观流动性、期限利差、信用利差、市场相关性、政策环境等多维度的核心特征因子体系</li>
+                        <li><strong>模型开发：</strong>以GARCH模型估计的波动率为预测目标，运用XGBoost算法挖掘特征间的非线性关系，识别REITs市场的潜在下行风险</li>
+                        <li><strong>动态配置：</strong>将REITs纳入大类资产投资组合，基于风险预测结果构建动态配置策略，提升组合收益和风险表现</li>
+                    </ul>
+                </div>
+                <div class="en-content" style="display:none">
+                    <h3>REITs Risk Prediction and Dynamic Allocation Strategy Based on XGBoost Algorithm</h3>
+                    <div class="period">02/2022 - 05/2022</div>
+                    <ul>
+                        <li><strong>Feature Engineering:</strong> Construct a multi-dimensional feature system covering macro liquidity, term spread, credit spread, market correlation and policy environment</li>
+                        <li><strong>Model Development:</strong> Take the volatility estimated by the GARCH model as the prediction target, use the XGBoost algorithm to mine the nonlinear relationship among features, and identify potential downside risks in the REITs market</li>
+                        <li><strong>Dynamic Allocation:</strong> Incorporate REITs into a multi-asset investment portfolio, formulate a dynamic allocation strategy based on risk prediction results, and improve the return and risk performance of the portfolio</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>© 2025 Evelyn (SUN Yuxin). All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        function setLang(lang) {
+            var zhContent = document.querySelectorAll('.zh-content');
+            var enContent = document.querySelectorAll('.en-content');
+            
+            zhContent.forEach(function(el) {
+                el.style.display = lang === 'en' ? 'none' : 'block';
+            });
+            enContent.forEach(function(el) {
+                el.style.display = lang === 'en' ? 'block' : 'none';
+            });
+            
+            var title = document.getElementById('about-title');
+            title.textContent = lang === 'en' ? 'About Me' : '关于我';
+            
+            var eduTitle = document.getElementById('edu-title');
+            eduTitle.textContent = lang === 'en' ? 'Education Background' : '教育经历';
+            
+            var skillsTitle = document.getElementById('skills-title');
+            skillsTitle.textContent = lang === 'en' ? 'Professional Skills and Certifications' : '专业技能和证书';
+            
+            var expTitle = document.getElementById('exp-title');
+            expTitle.textContent = lang === 'en' ? 'Internship Experience' : '实习经历';
+            
+            var projTitle = document.getElementById('proj-title');
+            projTitle.textContent = lang === 'en' ? 'Research Experience' : '项目经历';
+            
+            document.querySelectorAll('.lang-btn').forEach(function(btn) {
+                btn.classList.remove('active');
+                if ((lang === 'zh' && btn.textContent === '中文') || (lang === 'en' && btn.textContent === 'English')) {
+                    btn.classList.add('active');
+                }
+            });
+        }
+    </script>
+</body>
+</html>
